@@ -2,7 +2,6 @@ import { Refs } from './refs';
 
 const { inputEl, addBtnEl, todoListEl } = Refs();
 
-// Render the initial todo list
 function renderTodoList(list) {
   const listItemHTML = list
     .map(item => {
@@ -21,7 +20,6 @@ async function fetchTodoList() {
   try {
     const response = await fetch('http://localhost:3000/api/todos');
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error('Error fetching todo list:', error);
@@ -46,7 +44,6 @@ async function addTodo(task, completed) {
   }
 }
 
-// Function to handle adding a new todo
 addBtnEl.addEventListener('click', async () => {
   const inputValue = inputEl.value.trim();
   if (inputValue) {
@@ -60,11 +57,9 @@ addBtnEl.addEventListener('click', async () => {
   }
 });
 
-// Function to handle deleting a todo
 todoListEl.addEventListener('click', async event => {
   if (event.target.classList.contains('delete-btn')) {
     const itemId = event.target.getAttribute('data-id');
-    // Delete the todo from the backend
     const response = await fetch(`http://localhost:3000/api/todos/${itemId}`, {
       method: 'DELETE',
     });

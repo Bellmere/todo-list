@@ -1,11 +1,10 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { v1: uuidv1, v4: uuidv4 } = require('uuid');
+const { v1: uuidv1 } = require('uuid');
 const app = express();
 const port = 3000;
 
-// Sample data (replace with database)
 let todoList = [];
 
 app.use(cors());
@@ -18,7 +17,6 @@ app.get('/api/todos', (req, res) => {
 
 // Create a new todo
 app.post('/api/todos', (req, res) => {
-  console.log(req.body);
   const { task, completed } = req.body;
   const newTodo = { id: uuidv1(), task, completed };
   todoList.push(newTodo);
